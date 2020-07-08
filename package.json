@@ -1,5 +1,5 @@
 {
-	"name": "lorros-apollo",
+	"name": "meteor-apollo",
 	"private": true,
 	"scripts": {
 		"start": "meteor run",
