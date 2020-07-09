@@ -1,36 +1,21 @@
 import { ApolloServer, gql } from 'apollo-server-express'
 import { WebApp } from 'meteor/webapp'
+import merge from 'lodash/merge'
 import { getUser } from 'meteor/apollo'
 
 import ResolutionsSchema from '../../api/resolutions/resolutions.graphql'
+import ResolutionsResolvers from '../../api/resolutions/resolvers'
+
+//test one
 
 const testSchema = `
 type Query {
-  hi: String
   resolutions: [Resolution]
 }
 `
 const typeDefs = [testSchema, ResolutionsSchema]
 
-const resolvers = {
-	Query: {
-		hi() {
-			return 'Hello World!'
-		},
-		resolutions() {
-			return [
-				{
-					_id: '12345',
-					name: 'Bob',
-				},
-				{
-					_id: '456789',
-					name: 'Lily',
-				},
-			]
-		},
-	},
-}
+const resolvers = merge(ResolutionsResolvers)
 
 const server = new ApolloServer({
 	typeDefs,

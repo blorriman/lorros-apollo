@@ -2,13 +2,20 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 
-const App = ({ data }) => {
-	if (data.loading) return null
+import ResolutionFrom from './resolutions/resolutionForm'
+import RegisterForm from './auth/registerForm'
+import LoginForm from './auth/loginForm'
+
+const App = ({ loading, resolutions }) => {
+	if (loading) return null
 	return (
 		<div>
-			<h1>Welcome to Meteor! - {data.hi}</h1>
+			<h1>Welcome to Meteor!</h1>
+			<LoginForm />
+			<RegisterForm />
+			<ResolutionFrom />
 			<ul>
-				{data.resolutions.map((resolution) => (
+				{resolutions.map((resolution) => (
 					<li key={resolution._id}>{resolution.name}</li>
 				))}
 			</ul>
@@ -16,13 +23,14 @@ const App = ({ data }) => {
 	)
 }
 
-const hiQuery = gql`
-	{
-		hi
+const resolutionsQuery = gql`
+	query Resolutions {
 		resolutions {
 			_id
 			name
 		}
 	}
 `
-export default graphql(hiQuery)(App)
+export default graphql(resolutionsQuery, {
+	props: ({ data }) => ({ ...data }),
+})(App)
