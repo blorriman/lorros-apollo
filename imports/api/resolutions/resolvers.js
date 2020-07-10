@@ -2,15 +2,19 @@ import Resolutions from './resolutions'
 
 export default {
 	Query: {
-		resolutions() {
-			return Resolutions.find({}).fetch()
+		resolutions(obj, args, { user }) {
+			if (!user) return null
+			return Resolutions.find({
+				userId: user._id,
+			}).fetch()
 		},
 	},
 
 	Mutation: {
-		createResolution(obj, { name }, context) {
+		createResolution(obj, { name }, { user }) {
 			const resolutionId = Resolutions.insert({
 				name,
+				userId: user._id,
 			})
 			return Resolutions.findOne(resolutionId)
 		},

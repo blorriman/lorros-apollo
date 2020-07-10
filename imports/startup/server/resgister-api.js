@@ -6,7 +6,7 @@ import { getUser } from 'meteor/apollo'
 import ResolutionsSchema from '../../api/resolutions/resolutions.graphql'
 import ResolutionsResolvers from '../../api/resolutions/resolvers'
 
-//test one
+//test
 
 const testSchema = `
 type Query {
@@ -20,9 +20,18 @@ const resolvers = merge(ResolutionsResolvers)
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
+	context: async ({ req }) => ({
+		user: await getUser(req.headers.authorization),
+	}),
 })
 
 server.applyMiddleware({
 	app: WebApp.connectHandlers,
 	path: '/graphql',
+})
+
+WebApp.connectHandlers.use('/graphql', (req, res) => {
+	if (req.method === 'GET') {
+		res.end()
+	}
 })
