@@ -9,7 +9,7 @@ import { makeExecutableSchema } from 'graphql-tools'
 import ResolutionsSchema from '../../api/resolutions/resolutions.graphql'
 import ResolutionsResolvers from '../../api/resolutions/resolvers'
 
-//test
+//test one
 
 const testSchema = `
 type Query {
