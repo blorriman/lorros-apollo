@@ -20,25 +20,6 @@ const typeDefs = [testSchema, ResolutionsSchema]
 
 const resolvers = merge(ResolutionsResolvers)
 
-// const server = new ApolloServer({
-// 	typeDefs,
-// 	resolvers,
-// 	context: async ({ req }) => ({
-// 		user: await getUser(req.headers.authorization),
-// 	}),
-// })
-
-// server.applyMiddleware({
-// 	app: WebApp.connectHandlers,
-// 	path: '/graphql',
-// })
-
-// WebApp.connectHandlers.use('/graphql', (req, res) => {
-// 	if (req.method === 'GET') {
-// 		res.end()
-// 	}
-// })
-
 const schema = makeExecutableSchema({
 	typeDefs,
 	resolvers,
