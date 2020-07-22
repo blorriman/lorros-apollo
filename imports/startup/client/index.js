@@ -6,6 +6,7 @@ import gql from 'graphql-tag'
 import ApolloClient from 'apollo-client'
 import { DDPLink } from 'meteor/swydo:ddp-apollo'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+
 import { ApolloProvider } from 'react-apollo'
 
 import App from '/imports/ui/App'

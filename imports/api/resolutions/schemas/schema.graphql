@@ -1,7 +1,7 @@
-# type Query {
-#   name: String
-# }
+type Query {
+	name: String
+}
 
-# type Subscription {
-#   message: String
-# }
+type Subscription {
+	message: String
+}
